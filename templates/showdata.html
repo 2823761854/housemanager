@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script  src="/static/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<div style=" width:600px">
+    <div  style=" float:left; width:600px;"><div id="chart" style="width:600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+        // 指定图表的配置项和数据
+        // title :为图表配置标题
+        var option = {
+            title: { text: '武汉市各区租房均价'},
+           //配置提示信息：
+            tooltip: {},
+            //图例组件
+            legend: { data:['区域均价 单位：元/月'] },
+            xAxis: {
+                    data:[],
+                    // x轴文字倾斜
+                    axisLabel:{
+                        interval:0,
+                        rotate:-45,//倾斜度 -90 至 90 默认为0
+                        margin:2,
+                        textStyle:{
+                            //粗体
+                            //fontWeight:"bolder",
+                            color:"#000000"
+                  }
+                }
+            },
+            yAxis: {},
+            //系列列表包含示例图、图表类型，数据
+            series: [{
+                name: '区域均价 单位：元/月', // 系列名称
+                type: 'bar',        // 系列图表类型
+                data :[]            // 系列中的数据内容
+            }]
+        };
+        $(function(){
+            $.ajax({
+                url:'/houtai/bar_ajax/',
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    option.xAxis.data = data.x;
+                    option.series[0].data = data.y;
+                    myChart.setOption(option);
+                }
+            })
+        })
+    </script></div></div>
+     <div  style=" float:left; width:5px;"><div id="chart1" style="width:500px;height:400px;"></div>
+    <script type="text/javascript">
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+        var option1 = {
+        title: { text: '武汉市房屋出租价格分布' },
+        legend: { top: 'bottom' },
+        toolbox: {
+        show: true,
+        feature: {
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+    series: [
+        {
+            name: '武汉市房屋出租价格分布',
+            type: 'pie',
+            radius: [30, 160],
+            center: ['50%', '50%'],
+            roseType: 'area',
+            itemStyle: {
+                borderRadius: 1
+        },
+        data: [
+            {value:129, name:'1k以下'},
+            {value:300, name:'1k-2k'},
+            {value:177, name:'2k-3k'},
+            {value:83, name:'3k-4k'},
+            {value:39, name:'4k-5k'},
+            {value:20, name:'5k-6k'},
+            {value:17, name:'6k-7k'},
+            {value:17, name:'7k以上'},
+        ]
+        }
+    ]
+    };
+    myChart1.setOption(option1);
+
+    </script></div>
+</div>
+
+
+
+<div style=" width:600px">
+    <div  style=" float:left; width:600px;"><div id="chart3" style="width:600px;height:400px;"></div><!--1111-->
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart3 = echarts.init(document.getElementById('chart3'));//111
+                    // 指定图表的配置项和数据
+                    // title :为图表配置标题
+                    var option3 = {
+                        title: { text: '武汉市新房单价统计' },
+                        //配置提示信息：
+                        tooltip: {},
+                        //图例组件
+                        legend: { data: ['区域均价 单位：元/平米'] },
+                        xAxis: {
+                            data: [],
+                            // x轴文字倾斜
+                            axisLabel: {
+                                interval: 0,
+                                rotate: -45,//倾斜度 -90 至 90 默认为0
+                                margin: 2,
+                                textStyle: {
+                                    //粗体
+                                    //fontWeight:"bolder",
+                                    color: "#000000"
+                                }
+                            }
+                        },
+                        yAxis: {},
+                        //系列列表包含示例图、图表类型，数据
+
+                        series: [{
+                            name: '区域均价 单位：元/平米', // 系列名称
+                            type: 'bar',        // 系列图表类型
+                            data: []            // 系列中的数据内容
+                        }]
+                    };
+                    $(function () {
+                        $.ajax({
+                            url: '/houtai/bar_ajax3/',
+                            type: 'get',
+                            dataType: 'json',
+                            success: function (data) {
+                                option3.xAxis.data = data.x;
+                                option3.series[0].data = data.y;
+                                myChart3.setOption(option3);
+                            }
+                        })
+                    })
+                </script></div></div>
+     <div  style=" float:left; width:50px;"><div id="chart4" style="width:400px;height:400px;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart4 = echarts.init(document.getElementById('chart4'));
+                    var option4 = {
+                        title: { text: '武汉市新房房源信息统计' },
+                        legend: { top: 'bottom' },
+                        toolbox: {
+                            show: true,
+                            feature: {
+                                mark: { show: true },
+                                dataView: { show: true, readOnly: false },
+                                restore: { show: true },
+                                saveAsImage: { show: true }
+                            }
+                        },
+                        series: [
+                            {
+                                name: '武汉市房屋出租价格分布',
+                                type: 'pie',
+                                radius: [30, 160],
+                                center: ['50%', '50%'],
+                                roseType: 'area',
+                                itemStyle: {
+                                    borderRadius: 7
+                                },
+                                data: [
+                                    { value: 2, name: '5k以下' },
+                                    { value: 126, name: '5k-10k' },
+                                    { value: 147, name: '10k-15k' },
+                                    { value: 91, name: '15k-20k' },
+                                    { value: 72, name: '20k-25k' },
+                                    { value: 44, name: '25k-30k' },
+                                    { value: 85, name: '30k以上' }
+                                ]
+                            }
+                        ]
+                    };
+                    myChart4.setOption(option4);
+
+                </script></div>
+</div>
+
+
+<div style=" width:600px">
+    <div  style=" float:left; width:600px;"><div id="chart5" style="width:600px;height:400px;"></div>
+                <script type="text/javascript">
+                        var myChart5 = echarts.init(document.getElementById('chart5'));
+                        var option5 = {
+                            title: {
+                                text: '武汉市新房二手房均价对比'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: ['新房', '二手房']
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    dataView: { show: true, readOnly: false },
+                                    magicType: { show: true, type: ['line', 'bar'] },
+                                    restore: { show: true },
+                                    saveAsImage: { show: true }
+                                }
+                            },
+                            calculable: true,
+                            xAxis: {
+                                data: [],
+                                // x轴文字倾斜
+                                axisLabel: {
+                                    interval: 0,
+                                    rotate: -45,//倾斜度 -90 至 90 默认为0
+                                    margin: 2,
+                                    textStyle: {
+                                        //粗体
+                                        //fontWeight:"bolder",
+                                        color: "#000000"
+                                    }
+                                }
+                            },
+
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+
+                            series: [
+                                {
+                                    name: '新房',
+                                    type: 'bar',
+                                    data: [],
+                                    markPoint: {
+                                        data: [
+                                            { type: 'max', name: '最大值' },
+                                            { type: 'min', name: '最小值' }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            { type: 'average', name: '平均值' }
+                                        ]
+                                    }
+                                },
+                                {
+                                    name: '二手房',
+                                    type: 'bar',
+                                    data: [],
+                                    markPoint: {
+                                        data: [
+                                            { type: 'max', name: '最大值' },
+                                            { type: 'min', name: '最小值' }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            { type: 'average', name: '平均值' }
+                                        ]
+                                    }
+                                }
+                            ]
+                        };
+                        $(function () {
+                            $.ajax({
+                                url: '/houtai/bar_ajax5/',
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (data) {
+                                    option5.xAxis.data = data.x;
+                                    option5.series[0].data = data.y1;
+                                    option5.series[1].data = data.y2;
+                                    myChart5.setOption(option5);
+                                }
+                            })
+                        })
+
+                </script>
+</div></div>
+     <div  style=" float:left; width:50px;"><div id="chart6" style="width:600px;height:400px;"></div>
+                <script type="text/javascript">
+                        var myChart6 = echarts.init(document.getElementById('chart6'));
+                        var option6 = {
+                            title: {
+                                text: '武汉市新房二手房租房数量对比'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: ['新房', '二手房', '租房']
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    dataView: { show: true, readOnly: false },
+                                    magicType: { show: true, type: ['line', 'bar'] },
+                                    restore: { show: true },
+                                    saveAsImage: { show: true }
+                                }
+                            },
+                            calculable: true,
+                            xAxis: {
+                                data: [],
+                                // x轴文字倾斜
+                                axisLabel: {
+                                    interval: 0,
+                                    rotate: -45,//倾斜度 -90 至 90 默认为0
+                                    margin: 2,
+                                    textStyle: {
+                                        //粗体
+                                        //fontWeight:"bolder",
+                                        color: "#000000"
+                                    }
+                                }
+                            },
+
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+
+                            series: [
+                                {
+                                    name: '新房',
+                                    type: 'bar',
+                                    data: [],
+                                    markPoint: {
+                                        data: [
+                                            { type: 'max', name: '最大值' },
+                                            { type: 'min', name: '最小值' }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            { type: 'average', name: '平均值' }
+                                        ]
+                                    }
+                                },
+
+                                {
+                                    name: '二手房',
+                                    type: 'bar',
+                                    data: [],
+                                    markPoint: {
+                                        data: [
+                                            { type: 'max', name: '最大值' },
+                                            { type: 'min', name: '最小值' }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            { type: 'average', name: '平均值' }
+                                        ]
+                                    }
+                                },
+
+                                {
+                                    name: '租房',
+                                    type: 'bar',
+                                    data: [],
+                                    markPoint: {
+                                        data: [
+                                            { type: 'max', name: '最大值' },
+                                            { type: 'min', name: '最小值' }
+                                        ]
+                                    },
+                                    markLine: {
+                                        data: [
+                                            { type: 'average', name: '平均值' }
+                                        ]
+                                    }
+                                }
+                            ]
+                        };
+                        $(function () {
+                            $.ajax({
+                                url: '/houtai/bar_ajax6/',
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (data) {
+                                    option6.xAxis.data = data.x;
+                                    option6.series[0].data = data.y1;
+                                    option6.series[1].data = data.y2;
+                                    option6.series[2].data = data.y3;
+                                    myChart6.setOption(option6);
+                                }
+                            })
+                        })
+
+                </script></div>
+</div>
+
+
+
+</body>
+</html>

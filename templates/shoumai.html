@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/css/layui.css">
+    <style>
+        #container {
+            width: 900px
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <table class="layui-hide" lay-filter="shoumai" id="shoumai"></table>
+    </div>
+    <div class="layui-btn-container" align="center">
+        <button type="button" class="layui-btn" lay-event="add" id="add1">添  加</button>
+    </div>
+    <div style="display:none;padding: 20px" id="saveOrUpdateDiv1">
+        <form class="layui-form" lay-filter="dataFrm1" id="dataFrm1">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">发布者id:</label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="id">
+                        <input type="text" name="title" lay-verify="required" placeholder="请输入发布者id" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系方式:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="type" lay-verify="required" placeholder="请输入联系方式" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房屋占地面积（㎡）:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="size_room" lay-verify="required" placeholder="请输入占地面积需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房屋房型需求（新房/二手）:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="num_room" lay-verify="required" placeholder="请输入房屋房型需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房屋位置需求:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="location" lay-verify="required" placeholder="请输入房屋位置需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房价需求（万元）</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="totalPrice" lay-verify="required" placeholder="请输入房价需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">其他需求:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="area_room" lay-verify="required" placeholder="请输入其他需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: center;">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doEditSubmit" lay-submit="">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div style="display: none;padding: 20px" id="saveOrUpdateDiv2">
+        <form class="layui-form" lay-filter="dataFrm2" id="dataFrm2">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">发布者id:</label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="id">
+                        <input type="text" name="title" lay-verify="required" placeholder="请输入发布者id" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系方式:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="type" lay-verify="required" placeholder="请输入联系方式" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">占地面积需求（㎡）:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="size_room" lay-verify="required" placeholder="请输入占地面积需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房屋房型需求（新房/二手）:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="num_room" lay-verify="required" placeholder="请输入房屋房型需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房屋位置需求:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="location" lay-verify="required" placeholder="请输入房屋位置需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">房价需求（万元）</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="totalPrice" lay-verify="required" placeholder="请输入房价需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">其他需求:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="area_room" lay-verify="required" placeholder="请输入其他需求" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: center;">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doAddSubmit" lay-submit="">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/html" id="barDemo">
+
+     <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" lay-event="edit">编辑</button>
+     <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</button>
+    </script>
+    <script src="/static/js/layui.js"></script>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script>
+ layui.use(['table','form'], function(){
+            var table = layui.table;
+            var form = layui.form;
+            var mainIndex;
+
+            $("#add1").click(function(){
+               addmsg()
+                  });
+
+
+            tableIns=table.render({
+                elem: '#shoumai'
+                ,url:'/houtai/showshoumai/'
+                ,limit:5
+                ,limits:[5,10,20]
+                ,cols:[[
+                    {type: 'checkbox',fixed:'left'},
+                    {field: 'id', title:'ID', sort: true, fixed: 'left', width: 80},
+                    {field: 'title', title: '发布账号', width: 100},
+                    {field: 'type', title: '联系方式', width: 150},
+                    {field: 'size_room', title: '占地面积', width: 100},
+                    {field: 'num_room', title: '房型需求（新房/二手）', width: 100},
+                    {field: 'location', title: '位置需求', width: 100},
+                    {field: 'totalPrice', title: '房价需求（万元）',  width: 120, sort: true},
+                    {field: 'area_room', title: '其他需求', width: 100},
+                    {title:'操作',minWidth:'100',align:'center',toolbar:'#barDemo'}
+                ]]
+                ,page:true
+            });
+
+
+            //表格的事件监听
+            table.on('tool(shoumai)', function(obj){
+                var data = obj.data;//取到触发事件这一行的数据
+                console.log(data);
+                if(obj.event === 'del'){
+                    layer.confirm('是否要删除该条求购信息', function(index){
+                        $.ajax({
+                            url: "/houtai/drop_shoumai/",
+                            type: "POST",
+                            data:{"id":data.id,
+                                    csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()
+                                  },
+                            dataType: "json",
+                            success: function(data){
+                                obj.del();
+                                layer.close(index);
+                                layer.msg("删除成功", {icon: 6});
+                                tableIns.reload();
+                            },
+                            error:function (data) {
+                                layer.msg("删除失败", {icon: 5});
+                            }
+                        });
+                    });
+                } else if(obj.event === 'edit'){
+                    openUserUpdate(data);
+                }
+            });
+            function openUserUpdate(data) {
+                mainIndex=layer.open({
+                    type:1,
+                    title:'编辑售卖信息',
+                    content:$("#saveOrUpdateDiv1"),
+                    area:['800px','400px'],
+                    success:function(index){
+                        form.val("dataFrm1",data);
+                    },end:function(){ // 未点击确定按钮，点击关闭按钮
+　　　　　　          $("#saveOrUpdateDiv1").css("display","none");
+　　　　            }
+                });
+            }
+
+
+function addmsg(data) {
+                mainIndex=layer.open({
+                    type:1,
+                    title:'添加求购信息',
+                    content:$("#saveOrUpdateDiv2"),
+                    area:['800px','400px'],
+                    success:function(index){
+                        form.val("dataFrm2",data);
+                    },end:function(){ // 未点击确定按钮，点击关闭按钮
+　　　　　　          $("#saveOrUpdateDiv2").css("display","none");
+　　　　            }
+                });
+            }
+                        form.on("submit(doAddSubmit)",function(obj){
+                 $.post("/houtai/add_update_shoumai/",form.val('dataFrm2'),function(obj){
+                     layer.msg(obj.msg);
+                     //关闭弹出层
+                     layer.close(mainIndex);
+                     $("#saveOrUpdateDiv2").css("display","none");
+                     //刷新数据 表格
+                     tableIns.reload();
+                 })
+            });
+            //form表单的监听
+            form.on("submit(doEditSubmit)",function(obj){
+                 $.post("/houtai/update_shoumai/",form.val('dataFrm1'),function(obj){
+                     layer.msg(obj.msg);
+                     //关闭弹出层
+                     layer.close(mainIndex);
+                     $("#saveOrUpdateDiv1").css("display","none");
+                     //刷新数据 表格
+                     tableIns.reload();
+                 })
+            });
+        });
+
+    </script>
+</body>
+</html>

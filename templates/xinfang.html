@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/css/layui.css" >
+    <style>
+        #container{
+            width:900px
+            margin:0 auto;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="demoTable">
+  搜索地区:
+  <div class="layui-inline">
+    <input class="layui-input" id="demoReload" autocomplete="off">
+  </div>
+    搜索小区:
+    <div class="layui-inline">
+    <input class="layui-input" id="demoReload1" autocomplete="off">
+  </div>
+  <button class="layui-btn" data-type="reload" id="search">搜索</button>
+</div>
+
+    <div id="container">
+        <table class="layui-hide" lay-filter="xinfang" id="xinfang"></table>
+    </div>
+    <div class="layui-btn-container"  align="center"  >
+        <button type="button" class="layui-btn" lay-event="add"  id="add1" >添  加</button>
+    </div>
+    <!--编辑-->
+    <div style="display: none;padding: 20px" id="saveOrUpdateDiv1" >
+    <form class="layui-form"  lay-filter="dataFrm1" id="dataFrm1">
+        {% csrf_token %}
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">房产标题:</label>
+                <div class="layui-input-inline">
+                    <input type="hidden" name="id">
+                    <input type="text" name="name" lay-verify="required"   placeholder="请输入房产标题" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">房产信息:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="info" lay-verify="required"   placeholder="请输入房产信息" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">位置:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="location" lay-verify="required"  placeholder="请输入位置" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">总价:(万/套)</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="totalprice" lay-verify="required"  placeholder="请输入房产总价" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">平米均价:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="unitprice" lay-verify="required"  placeholder="请输入每平米价格" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doEditSubmit" lay-submit="">提交</button>
+                <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
+            </div>
+        </div>
+    </form>
+    </div>
+<!--第二个add-->
+ <div style="display: none;padding: 20px" id="saveOrUpdateDiv2" >
+    <form class="layui-form"  lay-filter="dataFrm2" id="dataFrm2">
+        {% csrf_token %}
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">房产标题:</label>
+                <div class="layui-input-inline">
+                    <input type="hidden" name="id">
+                    <input type="text" name="name" lay-verify="required"   placeholder="请输入房产标题" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">占地面积:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="info" lay-verify="required"   placeholder="请输入房产信息" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">位置:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="location" lay-verify="required"  placeholder="请输入位置" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">总价:(万)</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="totalprice" lay-verify="required"  placeholder="请输入房产总价" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">平米均价:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="unitprice" lay-verify="required"  placeholder="请输入每平米价格" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doAddSubmit" lay-submit="">提交</button>
+                <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <script  type="text/html" id="barDemo">
+       <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" lay-event="edit">编辑</button>
+       <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</button>
+    </script>
+    <script src="/static/js/layui.js"></script>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script>
+        layui.use(['table','form'], function(){
+            var table = layui.table;
+            var form = layui.form;
+            var mainIndex;
+            $("#add1").click(function(){
+                addmsg()
+                   });
+            tableIns=table.render({
+                elem: '#xinfang'
+                ,url:'/houtai/showbypage2/'
+                ,limit:8
+                ,limits:[8,10,50]
+                ,skin: 'row'
+                ,even: true
+                ,id:'showall'
+                ,cols:[[
+                    {type: 'checkbox',fixed:'left'},
+                    {field: 'id', title:'ID', sort: true, fixed: 'left', width: 100},
+                    {field: 'name', title: '房产标题', width: 180},
+                    {field: 'info', title: '占地面积', width: 150},
+                    {field: 'location', title: '位置', width: 220},
+                    {field: 'totalprice', title: '总价',  width:120, sort: true},
+                    {field: 'unitprice', title: '均价',  width: 100, sort: true},
+                    {title:'操作',minWidth:'140',align:'center',toolbar:'#barDemo'}
+                ]]
+                ,page:true
+            });
+    // 执行搜索，表格重载
+    $('#search').on('click', function () {
+      // 搜索条件
+      var send_data = $('#demoReload').val();
+      var price_data = $('#demoReload1').val();
+      table.reload('showall', {
+        limit:8
+       ,limits:[8,10,50]
+       ,page:{
+        cur:1
+        }
+        ,url:'/houtai/searchxin/'
+        ,method: 'GET'
+        , where: {
+          'send_data': send_data,
+          'price_data':price_data
+        }
+      });
+    });
+
+
+
+            //表格的事件监听
+            table.on('tool(xinfang)', function(obj){
+                var data = obj.data;//取到触发事件这一行的数据
+                console.log(data);
+                if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        $.ajax({
+                            url: "/houtai/drop_ajax2/",
+                            type: "POST",
+                            data:{"id":data.id,
+                                    csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()
+                                  },
+                            dataType: "json",
+                            success: function(data){
+                                obj.del();
+                                layer.close(index);
+                                layer.msg("删除成功", {icon: 6});
+                                tableIns.reload();
+                            },
+                            error:function (data) {
+                                layer.msg("删除失败", {icon: 5});
+                            }
+                        });
+                    });
+                }
+                else if(obj.event === 'edit'){
+                    openUserUpdate(data);
+                }
+            });
+            function openUserUpdate(data) {
+                mainIndex=layer.open({
+                    type:1,
+                    title:'编辑房产信息',
+                    content:$("#saveOrUpdateDiv1"),
+                    area:['800px','400px'],
+                    success:function(index){
+                        form.val("dataFrm1",data);
+                    },end:function(){ // 未点击确定按钮，点击关闭按钮
+　　　　　　          $("#saveOrUpdateDiv1").css("display","none");
+　　　　            }
+                });
+            }
+             function addmsg(data) {
+                mainIndex=layer.open({
+                    type:1,
+                    title:'添加房产信息',
+                    content:$("#saveOrUpdateDiv2"),
+                    area:['800px','400px'],
+                    success:function(index){
+                        form.val("dataFrm2",data);
+                    },end:function(){ // 未点击确定按钮，点击关闭按钮
+　　　　　　          $("#saveOrUpdateDiv2").css("display","none");
+　　　　            }
+                });
+            }
+                 form.on("submit(doAddSubmit)",function(obj){
+                 $.post("/houtai/add_update_ajax2/",form.val('dataFrm2'),function(obj){
+                     layer.msg(obj.msg);
+                     //关闭弹出层
+                     layer.close(mainIndex);
+                     $("#saveOrUpdateDiv2").css("display","none");
+                     //刷新数据 表格
+                     tableIns.reload();
+                 })
+            });
+            //form表单的监听
+            form.on("submit(doEditSubmit)",function(obj){
+                 $.post("/houtai/update_ajax2/",form.val('dataFrm1'),function(obj){
+                     layer.msg(obj.msg);
+                     //关闭弹出层
+                     layer.close(mainIndex);
+                     $("#saveOrUpdateDiv1").css("display","none");
+                     //刷新数据 表格
+                     tableIns.reload();
+                 })
+            });
+        });
+    </script>
+</body>
+</html>

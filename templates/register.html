@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Title -->
+    <title>FC | Login - Sign in</title>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="UTF-8">
+    <meta name="description" content="Admin Dashboard Template"/>
+    <meta name="keywords" content="admin,dashboard"/>
+    <meta name="author" content="Lalassu"/>
+
+    <!-- Styles -->
+    <link href="/static/forenter/pace-theme-flash.css" rel="stylesheet"/>
+    <link href="/static/forenter/default.css" rel="stylesheet"/>
+    <link href="/static/forenter/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/simple-line-icons.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/menu_cornerbox.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/waves.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/switchery.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Theme Styles -->
+    <link href="/static/forenter/layers.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/dark-layer.css" class="theme-color" rel="stylesheet" type="text/css"/>
+    <link href="/static/forenter/custom.css" rel="stylesheet" type="text/css"/>
+
+    <script src="/static/forenter/modernizr.js"></script>
+    <script src="/static/forenter/snap.svg-min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="page-login">
+<main class="page-content">
+    <div class="page-inner">
+        <div id="main-wrapper">
+            <div class="row">
+                <div class="col-md-3 center">
+                    <div class="panel panel-white" id="js-alerts">
+                        <div class="panel-body">
+                            <div class="login-box">
+                                <a href="index.html" size=20 class="logo-name text-lg text-center m-t-xs">手机号注册</a>
+                                <form class="m-t-md" action="/houtai/update/" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" name="username" class="form-control" placeholder="输入手机号" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control password" placeholder="输入密码" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block">注册</button>
+                                    <!-- <a href="forgot.html" class="display-block text-center m-t-md text-sm">Forgot Password?</a> -->
+                                    <p class="text-center m-t-xs text-sm">已有帐户?</p>
+                                    <a href="/houtai/tologin/" class="btn btn-default btn-block m-t-md">登录</a>
+                                </form>
+                                <LABEL style="font-size:18px;color:black">
+                                    <INPUT style="font-size:18px;color:black" type="checkbox" name="cb2" value=" ">
+                                </LABEL>我已经阅读并同意《隐私政策》和《用户使用协议》&nbsp;&nbsp;
+                                <p class="text-center m-t-xs text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Row -->
+        </div><!-- Main Wrapper -->
+    </div><!-- Page Inner -->
+</main><!-- Page Content -->
+
+
+<!-- Javascripts -->
+<script src="/static/forenter/jquery-3.1.0.min.js"></script>
+<script src="/static/forenter/jquery-ui.min.js"></script>
+<script src="/static/forenter/pace.min.js"></script>
+<script src="/static/forenter/jquery.blockui.js"></script>
+<script src="/static/forenter/bootstrap.min.js"></script>
+<script src="/static/forenter/jquery.slimscroll.min.js"></script>
+<script src="/static/forenter/switchery.min.js"></script>
+<script src="/static/forenter/jquery.uniform.standalone.js"></script>
+<script src="/static/forenter/classie.js"></script>
+<script src="/static/forenter/waves.min.js"></script>
+<script src="/static/forenter/layers.min.js"></script>
+<script>
+    layui.use('form',function(){
+        var form=layui.form;
+        form.render();
+    })
+</script>
+</body>
+</html>
